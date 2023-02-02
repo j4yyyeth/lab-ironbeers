@@ -34,4 +34,17 @@ router.get('/random-beer', function(req, res, next){
 
 });
 
+  router.get("/beer/:id", function(req, res, next){
+
+    punkAPI
+    .getBeer(req.params.id)
+    .then((result) => {
+    res.render('specific-beer.hbs', {result})
+    })
+    .catch(error => console.log(error));
+  
+  });
+
+
+
 module.exports = router;
