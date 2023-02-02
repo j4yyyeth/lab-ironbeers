@@ -1,14 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+const PunkAPIWrapper = require('punkapi-javascript-wrapper')
+const punkAPI = new PunkAPIWrapper();
+
 router.get('/', function(req, res, next) {
   res.render('index.hbs', { title: 'Home' });
 });
 
 router.get('/beers', function(req, res, next){
-  res.render('beers.hbs', { title: 'Beer'});
   getBeers();
+  res.render('beers.hbs', { title: 'Beers'}, beers);
 });
 
 router.get('/random-beer', function(req, res, next) {
