@@ -9,12 +9,29 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/beers', function(req, res, next){
-  getBeers();
-  res.render('beers.hbs', { title: 'Beers'}, beers);
+
+  punkAPI
+  .getBeers()
+  .then((beersFromApi) => {
+  res.render('beers.hbs', {
+    title: 'Beers',
+    beersFromApi: beersFromApi
+  })
+  })
 });
 
-router.get('/random-beer', function(req, res, next) {
-  res.render('beers.hbs', { title: 'Random Beer' });
+router.get('/random-beer', function(req, res, next){
+
+  punkAPI
+  .getRandom()
+  .then((beersFromApi) => {
+  res.render('random-beer.hbs', {
+    title: 'Random Beer',
+    beersFromApi: beersFromApi
+  })
+  })
+  .catch(error => console.log(error));
+
 });
 
 module.exports = router;
